@@ -10,10 +10,17 @@ api_key = os.getenv("GEMINI_API_KEY")
 client = genai.Client(api_key=api_key)
 
 # 3. 질문 하나 보내기
-response = client.models.generate_content(
-    model="gemini-2.5-flash",
-    contents="양자역학이 무슨 학문인지 한 문장으로 설명해줘."
-)
-
-# 4. 답을 화면에 출력
-print(response.text)
+print("안녕하세요! 저는 구글 gemini-2.5-flash입니다. 궁금하신 질문을 입력해주세요! 없으시다면 공백 또는 N을 입력해주세요")
+while True:
+        user_input=input("질문 입력 칸:")
+        if user_input=="N" or user_input=="":
+            break
+        else:
+            response = client.models.generate_content(
+            model="gemini-2.5-flash", contents=user_input)
+        print("-"*40)
+        print("-"*40)
+        print(response.text)# 4. 답을 화면에 출력
+        print("-"*40)
+        print("-"*40)
+        
