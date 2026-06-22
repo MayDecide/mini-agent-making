@@ -16,6 +16,10 @@ while True:
         user_input=input("질문 입력 칸:")
         if user_input=="N" or user_input=="":
             break
+        elif user_input=="/초기화":
+             messages.clear()
+             print("기록을 지웠습니다.")
+             continue
         else:
             messages.append({"role": "user", "parts": [{"text": user_input}]})
             response = client.models.generate_content(
