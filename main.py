@@ -21,13 +21,18 @@ while True:
              print("기록을 지웠습니다.")
              continue
         else:
-            messages.append({"role": "user", "parts": [{"text": user_input}]})
-            response = client.models.generate_content(
-            model="gemini-2.5-flash", contents=messages)
-            messages.append({"role": "model", "parts": [{"text": response.text}]})
-            print("-"*40)
-            print("-"*40)
-            print(response.text)
-            print("-"*40)
-            print("-"*40)
+            try:
+                 messages.append({"role": "user", "parts": [{"text": user_input}]})
+                 response = client.models.generate_content(
+                    model="gemini-2.5-flash", contents=messages)
+                 messages.append({"role": "model", "parts": [{"text": response.text}]})
+                 print("-"*40)
+                 print("-"*40)
+                 print(response.text)
+                 print("-"*40)
+                 print("-"*40)
+            except:
+                print("잠시 후에 다시 시도해주세요.")
+                continue
+
         
