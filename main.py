@@ -11,6 +11,9 @@ client = genai.Client(api_key=api_key)
 
 # 3. 질문 하나 보내기
 messages=[]
+def print_line():
+       print("-"*40)
+       print("-"*40)
 def ask_to_gemini(messages):
        response = client.models.generate_content(
                     model="gemini-2.5-flash", contents=messages)
@@ -35,11 +38,9 @@ while True:
                  messages.append({"role": "user", "parts": [{"text": user_input}]})
                  response = ask_to_gemini(messages)
                  messages.append({"role": "model", "parts": [{"text": response.text}]})
-                 print("-"*40)
-                 print("-"*40)
+                 print_line()
                  print(response.text)
-                 print("-"*40)
-                 print("-"*40)
+                 print_line()
                  if is_summary:  #"/요약"에서 변경함.
                         messages.pop()
                         messages.pop()                      #pop()은 리스트 맨 뒤 요소를 없애는 것이기 때문에 그냥 pop()만 해도 됨!
