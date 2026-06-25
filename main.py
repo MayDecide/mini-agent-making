@@ -11,7 +11,13 @@ client = genai.Client(api_key=api_key)
 
 # 3. 질문 하나 보내기
 messages=[]
-print("안녕하세요! 저는 구글 gemini-2.5-flash입니다. 궁금하신 질문을 입력해주세요! 없으시다면 공백 또는 N을 입력해주세요")
+def ask_to_gemini(messages):
+       response = client.models.generate_content(
+                    model="gemini-2.5-flash", contents=messages)
+       return response
+def greet():
+       print("안녕하세요! 저는 구글 gemini-2.5-flash입니다. 궁금하신 질문을 입력해주세요! 없으시다면 공백 또는 N을 입력해주세요")
+greet()
 while True:
         user_input=input("질문 입력 칸:")
         is_summary=False
@@ -27,8 +33,7 @@ while True:
         
         try:
                  messages.append({"role": "user", "parts": [{"text": user_input}]})
-                 response = client.models.generate_content(
-                    model="gemini-2.5-flash", contents=messages)
+                 response = ask_to_gemini(messages)
                  messages.append({"role": "model", "parts": [{"text": response.text}]})
                  print("-"*40)
                  print("-"*40)
